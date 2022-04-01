@@ -21,7 +21,7 @@ function Music({data, select, deselect, isSelected}) {
             </div>
             <div>
                 {isSelected
-                    ? <button onClick={handleDeselect} className='btn select'>Deselect</button>
+                    ? <button onClick={handleDeselect} className='btn selected'>Deselect</button>
                     : <button onClick={handleSelect} className='btn select'>Select</button>
                 }
             </div>

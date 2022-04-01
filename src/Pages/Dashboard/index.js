@@ -20,10 +20,11 @@ function App() {
   const [musicData, setMusicData] = useState([]);
   const [isDataExist, setIsDataExist] = useState(false);
   const [isAuthorize, setIsAuthorize] = useState(false);
-  const [selectedMusic, setSelectedMusic] = useState({
-    'id': [],
-    'tracks': [],
-  });
+  // const [selectedMusic, setSelectedMusic] = useState({
+  //   'id': [],
+  //   'tracks': [],
+  // });
+  const [selectedMusic, setSelectedMusic] = useState([]);
 
   const getReturnSpotifyAuth = (hash) => {
     const stringAfterHash = hash.substring(1);
@@ -88,26 +89,29 @@ function App() {
   // }
 
   const selectMusic = (data) => {
-    const tempArrMusic = [...selectedMusic.tracks, data];
-    const tempArrMusicId = [...selectedMusic.id, data.uri];
-    setSelectedMusic({
-      'id' : tempArrMusicId,
-      'tracks' : tempArrMusic,
-    });
+    // const tempArrMusic = [...selectedMusic.tracks, data];
+    const tempArrMusicId = [...selectedMusic, data.uri];
+
+    // setSelectedMusic({
+    //   'id' : tempArrMusicId,
+    //   'tracks' : tempArrMusic,
+    // });
+    setSelectedMusic(tempArrMusicId);
   }
 
   const deselectMusic = (data) => {
     const index = selectedMusic.id.indexOf(data.uri);
 
-    const tempArrMusic = selectedMusic.tracks;
-    tempArrMusic.splice(index, 1);
-    const tempArrMusicId = selectedMusic.id;
+    // const tempArrMusic = selectedMusic.tracks;
+    // tempArrMusic.splice(index, 1);
+    const tempArrMusicId = selectedMusic;
     tempArrMusicId.splice(index, 1);
 
-    setSelectedMusic({
-      'id' : tempArrMusicId,
-      'tracks' : tempArrMusic,
-    });
+    // setSelectedMusic({
+    //   'id' : tempArrMusicId,
+    //   'tracks' : tempArrMusic,
+    // });
+    setSelectedMusic(tempArrMusicId);
   }
 
   useEffect(() => {
@@ -128,18 +132,25 @@ function App() {
         <><p>You need to login to access this feature</p></>
       }
       <div className='musics-wrapper'>
-        {
+        {/* {
           selectedMusic.tracks.map((music) => {
             return <Music key={music.uri} data={music} select={selectMusic} deselect={deselectMusic} isSelected={true}/>
           })
-        }
-        {isDataExist &&
+        } */}
+        {/* {isDataExist &&
           musicData
           .filter((music) => {
             return !selectedMusic.id.includes(music.uri);
           })
           .map((music) => {
             return <Music key={music.uri} data={music} select={selectMusic} deselect={deselectMusic} isSelected={false}/>
+          })
+        } */}
+        {
+          musicData.map((music) => {
+            return selectedMusic.includes(music.uri)
+            ? <Music key={music.uri} data={music} select={selectMusic} deselect={deselectMusic} isSelected={true}/>
+            : <Music key={music.uri} data={music} select={selectMusic} deselect={deselectMusic} isSelected={false}/>
           })
         }
       </div>
