@@ -1,0 +1,21 @@
+.playlist-form {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.input {
+    display: block;
+    text-align: center;
+    margin: 10px auto;
+    font-size: 16px;
+}
+
+.text {
+    width: 300px;
+}
+
+.textarea {
+    width: 300px;
+    height: 100px;
+}

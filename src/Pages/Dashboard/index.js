@@ -1,8 +1,9 @@
 import '../../Assets/Styles/App.css';
 import Music from '../../Components/Music';
-// import SearchBar from '../../Components/SearchBar';
+import SearchBar from '../../Components/SearchBar';
 // import data from './data';
 import React, { useEffect, useState } from 'react';
+import PlaylistForm from '../../Components/PlaylistForm';
 
 // https://accounts.spotify.com/authorize?response_type=token&client_id=&scope=&redirect_uri=&state=
 
@@ -18,13 +19,12 @@ function App() {
   const [authToken, setAuthToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
   const [musicData, setMusicData] = useState([]);
-  const [isDataExist, setIsDataExist] = useState(false);
   const [isAuthorize, setIsAuthorize] = useState(false);
-  // const [selectedMusic, setSelectedMusic] = useState({
-  //   'id': [],
-  //   'tracks': [],
-  // });
   const [selectedMusic, setSelectedMusic] = useState([]);
+  const [playlistInfo, setPlaylistInfo] = useState({
+    "name": "",
+    "description": ""
+  });
 
   const getReturnSpotifyAuth = (hash) => {
     const stringAfterHash = hash.substring(1);
@@ -36,17 +36,23 @@ function App() {
     }, {});
     setAuthToken(paramSplitUp.access_token);
     setIsAuthorize(true);
-  }
+  };
   
   const handleLogin = () => {
     window.location = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`;
-  }
+  };
 
   const handleInput = (e) => {
     setSearchKey(e.target.value);
-  }
+  };
 
-  const handleSearch = async () => {
+  const handleFormPlaylist = (e) => {
+    const { name, value } = e.target;
+    setPlaylistInfo({...playlistInfo, [name]: value });
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
     const url = "https://api.spotify.com/v1/search";
     const keywords = searchKey;
     const type = "track";
@@ -55,64 +61,139 @@ function App() {
         headers: {
           'Authorization' : 'Bearer ' + authToken
         }
-      })
+      });
+      
       if (!response.ok) {
         switch (response.status) {
           case 401:
             throw new Error(`Unauthorized access, please login first`);
-            break;
           case 403:
             throw new Error(`Forbidden access`);
-            break;
           default:
             throw new Error(`HTTP error! status: ${response.status}`);
-            break;
         }
       } else {
         const musicData = await response.json()
         setMusicData(musicData.tracks.items);
-        setIsDataExist(true);
       }
     } catch (error) {
       alert(`There has been a problem with your fetch operation: ${error.message}`);
     }
+  };
+
+  const fetchProfile = async () => {
+    const url = "https://api.spotify.com/v1/me";
+    try {
+      const response = await fetch(`${url}`, {
+        headers: {
+          'Authorization' : 'Bearer ' + authToken
+        }
+      });
+
+      if (!response.ok) {
+        switch (response.status) {
+          case 401:
+            throw new Error(`Unauthorized access, please login first`);
+          case 403:
+            throw new Error(`Forbidden access`);
+          default:
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+      } else {
+        const userData = await response.json()
+        return userData.id;
+      }
+    } catch (error) {
+      alert(`There has been a problem with your fetch operation: ${error.message}`);
+    }
+  };
+
+  const createPlaylist = async (userID) => {
+    const url = "https://api.spotify.com/v1/users/";
+    const playlistParam = {
+      ...playlistInfo,
+      'public': false,
+      'collaborative': false
+    }
+    try {
+      const response = await fetch(`${url}${userID}/playlists`, {
+        method: 'POST',
+        headers: {
+          'Authorization' : 'Bearer ' + authToken,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(playlistParam)
+      });
+
+      if (!response.ok) {
+        switch (response.status) {
+          case 401:
+            throw new Error(`Unauthorized access, please login first`);
+          case 403:
+            throw new Error(`Forbidden access`);
+          default:
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+      } else {
+        const playlistData = await response.json()
+        return playlistData.id;
+      }
+    } catch (error) {
+      alert(`There has been a problem with your post data operation: ${error.message}`);
+    }
+  };
+
+  const addItemsToPlaylist = async (playlistId) => {
+    const url = "https://api.spotify.com/v1/playlists/";
+    const tracksParam = {'uris': selectedMusic}
+    try {
+      const response = await fetch(`${url}${playlistId}/tracks`, {
+        method: 'POST',
+        headers: {
+          'Authorization' : 'Bearer ' + authToken,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(tracksParam)
+      });
+
+      if (!response.ok) {
+        switch (response.status) {
+          case 401:
+            throw new Error(`Unauthorized access, please login first`);
+          case 403:
+            throw new Error(`Forbidden access`);
+          default:
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+      } else {
+        const addedTracks = await response.json()
+        return addedTracks;
+      }
+    } catch (error) {
+      alert(`There has been a problem with your post data operation: ${error.message}`);
+    }
   }
 
-  // const usePrevious = (value) => {
-  //   const ref = useRef();
-
-  //   useEffect(() => {
-  //     ref.current = value;
-  //   }, [value]);
-
-  //   return ref.current;
-  // }
+  const handleCreatePlaylist = async (e) => {
+    e.preventDefault();
+    const userId = await fetchProfile();
+    const playlistId = await createPlaylist(userId);
+    const snapshotId = await addItemsToPlaylist(playlistId);
+    alert(`Yout playlist has been added\nSnapshot: ${snapshotId.snapshot_id}`)
+  };
 
   const selectMusic = (data) => {
-    // const tempArrMusic = [...selectedMusic.tracks, data];
     const tempArrMusicId = [...selectedMusic, data.uri];
-
-    // setSelectedMusic({
-    //   'id' : tempArrMusicId,
-    //   'tracks' : tempArrMusic,
-    // });
     setSelectedMusic(tempArrMusicId);
-  }
+  };
 
   const deselectMusic = (data) => {
-    const index = selectedMusic.id.indexOf(data.uri);
+    const index = selectedMusic.indexOf(data.uri);
 
-    // const tempArrMusic = selectedMusic.tracks;
-    // tempArrMusic.splice(index, 1);
-    const tempArrMusicId = selectedMusic;
+    const tempArrMusicId = selectedMusic.concat([]);
     tempArrMusicId.splice(index, 1);
-
-    // setSelectedMusic({
-    //   'id' : tempArrMusicId,
-    //   'tracks' : tempArrMusic,
-    // });
     setSelectedMusic(tempArrMusicId);
-  }
+  };
 
   useEffect(() => {
     if (window.location.hash) {
@@ -120,37 +201,37 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+
+  })
+
   return (
     <div className="App">
-      <h1>Search your Track</h1>
+      <h1>Create your own playlist</h1>
       <button onClick={handleLogin}>Login to Spotify</button>
-      <form className='SearchBar' onSubmit={handleSearch}>
-          <input onChange={handleInput} type="text" />
-          <input type="submit" value="Search" />
-      </form>
+      <PlaylistForm handleFormPlaylist={handleFormPlaylist} handleCreatePlaylist={handleCreatePlaylist}/>
+      <h3>Search and select your tracks first, before saving the playlist.</h3>
+      <SearchBar handleInput={handleInput} handleSearch={handleSearch}/>
       {!isAuthorize && 
         <><p>You need to login to access this feature</p></>
       }
       <div className='musics-wrapper'>
-        {/* {
-          selectedMusic.tracks.map((music) => {
-            return <Music key={music.uri} data={music} select={selectMusic} deselect={deselectMusic} isSelected={true}/>
-          })
-        } */}
-        {/* {isDataExist &&
+        {
           musicData
           .filter((music) => {
-            return !selectedMusic.id.includes(music.uri);
+            return selectedMusic.includes(music.uri);
+          })
+          .map((music) => {
+            return <Music key={music.uri} data={music} select={selectMusic} deselect={deselectMusic} isSelected={true}/>
+          })
+        }
+        {
+          musicData
+          .filter((music) => {
+            return !selectedMusic.includes(music.uri);
           })
           .map((music) => {
             return <Music key={music.uri} data={music} select={selectMusic} deselect={deselectMusic} isSelected={false}/>
-          })
-        } */}
-        {
-          musicData.map((music) => {
-            return selectedMusic.includes(music.uri)
-            ? <Music key={music.uri} data={music} select={selectMusic} deselect={deselectMusic} isSelected={true}/>
-            : <Music key={music.uri} data={music} select={selectMusic} deselect={deselectMusic} isSelected={false}/>
           })
         }
       </div>
