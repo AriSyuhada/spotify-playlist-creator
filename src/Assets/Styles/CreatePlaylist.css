@@ -1,0 +1,6 @@
+.musics-wrapper {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 360px);
+    grid-gap: 20px;
+}

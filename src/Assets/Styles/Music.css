@@ -4,36 +4,81 @@
     color: white;
     float: left;
     padding: 30px;
-    width: 200px;
-    height: 300px;
-    margin: 10px;
+    width: 300px;
+    height: 160px;
     position: relative;
 }
 
+.music-wrapper {
+    display: flex;
+}
+
+.music-info {
+    flex-grow: 1;
+    width: 50%;
+    justify-content: center;
+}
+
 .music-img img {
-    width: 160px;
-    border-radius: 100px;
+    width: 100px;
+    border-radius: 50px;
 }
 
 .btn {
     position: absolute;
-    bottom: 35px;
-    left: 55px;
+    bottom: 25px;
+    left: 105px;
     width: 150px;
     height: 30px;
     border-radius: 10px;
     border: none;
 }
 
+.title-wrapper {
+    width: 75%;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .music-title {
     font-size: 18px;
     margin-bottom: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.music-title:not(:hover) {
+    text-overflow: ellipsis;
+}
+
+.music-title:hover, .music-title:focus {
+    display: inline-block;
+    animation-name: scroll-left;
+    animation-duration: 7s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+}
+
+@keyframes scroll-left {
+    0% {
+        overflow: visible;
+        right: 0px;
+        transform: translateX(0%);
+    }
+    90%,
+    100% {
+        overflow: visible;
+        right: 100%;
+        transform: translateX(-100%);
+    }
 }
 
 .music-artist {
     font-size: 15px;
-    margin-top: 2px;
-    margin-bottom: 20px;
+    margin-top: 5px;
 }
 
 .select {

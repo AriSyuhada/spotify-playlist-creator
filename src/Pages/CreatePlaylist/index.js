@@ -1,4 +1,5 @@
 import "../../Assets/Styles/App.css";
+import "../../Assets/Styles/CreatePlaylist.css";
 import Music from "../../Components/Music";
 import SearchBar from "../../Components/SearchBar";
 // import data from './data';
@@ -27,12 +28,12 @@ function CreatePlaylist() {
 		const type = "track";
 		console.log(token);
 		try {
-			const response = await fetch(`${url}?q=${keywords}&type=${type}&limit=10`, {
+			const response = await fetch(`${url}?q=${keywords}&type=${type}&limit=12`, {
 				headers: {
 					"Authorization" : "Bearer " + token
 				}
 			});
-      
+
 			if (!response.ok) {
 				switch (response.status) {
 				case 401:
@@ -51,7 +52,6 @@ function CreatePlaylist() {
 		}
 	};
 
-  
 	const selectMusic = (data) => {
 		const tempArrMusicId = [...selectedMusic, data.uri];
 		setSelectedMusic(tempArrMusicId);
@@ -79,6 +79,7 @@ function CreatePlaylist() {
 			<SearchBar handleInput={handleInput} handleSearch={handleSearch}/>
 
 			<div className='musics-wrapper'>
+
 				{
 					musicData
 						.filter((music) => {

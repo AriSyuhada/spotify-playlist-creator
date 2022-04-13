@@ -21,12 +21,16 @@ function Music({data, select, deselect, isSelected}) {
 
 	return (
 		<div className='Music'>
-			<div className='music-img'>
-				<img src={data.album.images[0].url} alt={data.name}/>
-			</div>
-			<div className='music-info'>
-				<p className='music-title'>{data.name}</p>
-				<p className='music-artist'>{data.artists[0].name}</p>
+			<div className="music-wrapper">
+				<div className='music-img'>
+					<img src={data.album.images[0].url} alt={data.name}/>
+				</div>
+				<div className='music-info'>
+					<div className="title-wrapper">
+						<p className='music-title'>{data.name}</p>
+					</div>
+					<p className='music-artist'>{data.artists[0].name}</p>
+				</div>
 			</div>
 			<div>
 				{isSelected
