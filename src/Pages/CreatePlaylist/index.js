@@ -12,45 +12,10 @@ import {
 
 function CreatePlaylist() {
 
-	const [searchKey, setSearchKey] = useState("");
-	const [musicData, setMusicData] = useState([]);
+	// const [musicData, setMusicData] = useState([]);
 	const [selectedMusic, setSelectedMusic] = useState([]);
 	const { token } = useSelector((state) => state.userToken);
-
-	const handleInput = (e) => {
-		setSearchKey(e.target.value);
-	};
-
-	const handleSearch = async (e) => {
-		e.preventDefault();
-		const url = "https://api.spotify.com/v1/search";
-		const keywords = searchKey;
-		const type = "track";
-		console.log(token);
-		try {
-			const response = await fetch(`${url}?q=${keywords}&type=${type}&limit=12`, {
-				headers: {
-					"Authorization" : "Bearer " + token
-				}
-			});
-
-			if (!response.ok) {
-				switch (response.status) {
-				case 401:
-					throw new Error("Unauthorized access, please login first");
-				case 403:
-					throw new Error("Forbidden access");
-				default:
-					throw new Error(`HTTP error! status: ${response.status}`);
-				}
-			} else {
-				const musicData = await response.json();
-				setMusicData(musicData.tracks.items);
-			}
-		} catch (error) {
-			alert(`There has been a problem with your fetch operation: ${error.message}`);
-		}
-	};
+	const { items } = useSelector((state) => state.musicsData);
 
 	const selectMusic = (data) => {
 		const tempArrMusicId = [...selectedMusic, data.uri];
@@ -67,21 +32,20 @@ function CreatePlaylist() {
 
 	return (
 		<div className="App">
+
 			{
 				token === "" ? <Redirect to="/"/> : <p>You&apos;re Logged in</p> 
 			}
+
 			<h1>Create your own playlist</h1>
-
 			<PlaylistForm selectedMusic={selectedMusic} />
-
 			<h3>Search and select your tracks first, before saving the playlist.</h3>
+			<SearchBar />
 
-			<SearchBar handleInput={handleInput} handleSearch={handleSearch}/>
-
-			<div className='musics-wrapper'>
+			<div className="musics-wrapper">
 
 				{
-					musicData
+					items
 						.filter((music) => {
 							return selectedMusic.includes(music.uri);
 						})
@@ -90,7 +54,7 @@ function CreatePlaylist() {
 						})
 				}
 				{
-					musicData
+					items
 						.filter((music) => {
 							return !selectedMusic.includes(music.uri);
 						})
@@ -100,6 +64,7 @@ function CreatePlaylist() {
 				}
 
 			</div>
+			
 		</div>
 	);
 }

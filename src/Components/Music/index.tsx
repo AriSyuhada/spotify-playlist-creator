@@ -1,15 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import "../../Assets/Styles/Music.css";
+import { Item } from "../../Interfaces/ISpotifyResponse";
 
-Music.propTypes = {
-	data: PropTypes.any,
-	select: PropTypes.func,
-	deselect: PropTypes.func,
-	isSelected: PropTypes.any,
-};
+// Music.propTypes = {
+// 	data: PropTypes.any,
+// 	select: PropTypes.func,
+// 	deselect: PropTypes.func,
+// 	isSelected: PropTypes.any,
+// };
 
-function Music({data, select, deselect, isSelected}) {
+
+function Music({data, select, deselect, isSelected} : {
+	data: Item,
+	select: (item: Item) => void,
+	deselect: (item: Item) => void,
+	isSelected: boolean
+
+}) {
 
 	const handleSelect = () => {
 		select(data);

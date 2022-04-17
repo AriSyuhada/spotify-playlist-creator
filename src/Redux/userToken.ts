@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Token } from "../Interfaces/IToken";
 
-const initialState = {
+const initialState: Token = {
 	token: "",
 };
 
