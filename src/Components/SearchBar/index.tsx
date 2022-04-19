@@ -58,7 +58,7 @@ function SearchBar() {
 	return (
 		<>
 			<form className='SearchBar' onSubmit={handleSearch}>
-				<Search placeholder="input search text" onChange={handleInput} />
+				<Search placeholder="Search your musics..." onChange={handleInput} />
 			</form>
 		</>
 	);

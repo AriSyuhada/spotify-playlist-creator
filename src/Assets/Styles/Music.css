@@ -1,6 +1,6 @@
 .Music {
     border-radius: 20px;
-    background-color: #181818;
+    background-color: #141414;
     color: white;
     float: left;
     padding: 30px;
@@ -77,9 +77,10 @@
 }
 
 .music-artist {
+    text-align: center;
+    width: 80%;
     font-size: 15px;
-    margin-top: 5px;
-    margin-bottom: 0px;
+    margin: 5px auto 0 auto;
 }
 
 .select {

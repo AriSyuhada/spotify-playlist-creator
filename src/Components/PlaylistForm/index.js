@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import "../../Assets/Styles/PlaylistForm.css";
-import { Button } from "antd";
+import { Button, Input } from "antd";
+
 
 PlaylistForm.propTypes = {
 	selectedMusic: PropTypes.any,
@@ -14,6 +15,7 @@ function PlaylistForm ({selectedMusic}) {
 		"name": "",
 		"description": ""
 	});
+	const { TextArea } = Input;
     
 	const handleFormPlaylist = (e) => {
 		const { name, value } = e.target;
@@ -125,9 +127,10 @@ function PlaylistForm ({selectedMusic}) {
 		<>
 			<form className='playlist-form' action="" onSubmit={handleCreatePlaylist}>
 				<label htmlFor="input-name">Playlist Name</label>
-				<input id='input-name' className='input text' onChange={handleFormPlaylist} type="text" name="name" required/>
+				<Input id='input-name' className='input text' onChange={handleFormPlaylist} name="name" required allowClear />
 				<label htmlFor="input-desc">Playlist Description</label>
-				<textarea id='input-desc' className='input textarea' onChange={handleFormPlaylist} type="textarea" name="description" minLength={10} required/>
+				{/* <textarea id='input-desc' className='input textarea' onChange={handleFormPlaylist} type="textarea" name="description" minLength={10} required/> */}
+				<TextArea id='input-desc' className='input textarea' onChange={handleFormPlaylist} name="description" minLength={10} required allowClear />
 				{/* <input className='input submit' type="submit" value="Save Playlist" /> */}
 				<Button size="medium" htmlType="submit">Submit</Button>
 			</form>

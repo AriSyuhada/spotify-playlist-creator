@@ -28,7 +28,7 @@ function Music({data, select, deselect, isSelected} : {
 	};
 
 	return (
-		<div className='Music'>
+		<div aria-label="Music" className='Music'>
 			<div className="music-wrapper">
 				<div className='music-img'>
 					<img src={data.album.images[0].url} alt={data.name}/>
