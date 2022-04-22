@@ -8,7 +8,7 @@ import { Button } from "antd";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URL = "http://localhost:3000/";
+const REDIRECT_URL = window.location.href;
 const SPACE_DELIMITER = "%20";
 const SCOPES = ["playlist-modify-private", "user-read-private"];
 const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER);
