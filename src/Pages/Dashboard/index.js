@@ -1,10 +1,10 @@
-import "../../Assets/Styles/App.css";
+import "../../Assets/Styles/Dashboard.css";
 import { useDispatch, useSelector } from "react-redux";
 import { saveToken } from "../../Redux/userToken";
 import React, { useEffect } from "react";
-import {
-	Redirect
-} from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import { Button } from "antd";
+// import sideImage from "../../Assets/Images/omid-armin-GIm5OV5rY0w-unsplash.jpg";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -14,8 +14,6 @@ const SCOPES = ["playlist-modify-private", "user-read-private"];
 const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER);
 
 function Dashboard() {
-	// const [isAuthorize, setIsAuthorize] = useState(false);
-	// const [authToken, setAuthToken] = useState("");
 	const { token } = useSelector((state) => state.userToken);
 	const dispatch = useDispatch();
 
@@ -27,9 +25,7 @@ function Dashboard() {
 			accumulater[key] = value;
 			return accumulater;
 		}, {});
-		// setAuthToken(paramSplitUp.access_token);
 		dispatch(saveToken(paramSplitUp.access_token));
-		// setIsAuthorize(true);
 	};
     
 	const handleLogin = () => {
@@ -43,13 +39,23 @@ function Dashboard() {
 	}, []);
 
 	return (
-		<div className='App'>
-			<h1>Login to your Spotify Account</h1>
-			{
-				token !== "" ? <Redirect to="/create-playlist"/> : <p>You need to login</p> 
-			}
-			<button onClick={handleLogin}>Login to Spotify</button>
-		</div>
+		<>
+			<div className="top-wrapper">
+				<div className="side-info">
+					<h1 className="landing-title">Create your own playlist on Spotify</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies et mauris a pulvinar. 
+						Donec vitae diam metus. Aliquam eu varius libero. Donec non fringilla enim, non tincidunt felis. 
+						Fusce libero ligula, sagittis a nunc ut, dignissim scelerisque odio. Praesent laoreet rhoncus magna at rutrum. 
+						Nunc nunc lectus, hendrerit a.</p>
+					{
+						token !== "" ? <Redirect to="/create-playlist"/> : <p className="login-info">You need to login to proceed</p> 
+					}
+					<Button type="primary" shape="round" onClick={handleLogin}>Log In</Button>
+				</div>
+				<div className="side-image">
+				</div>
+			</div>
+		</>
 	);
 }
 

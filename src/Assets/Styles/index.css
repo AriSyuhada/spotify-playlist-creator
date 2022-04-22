@@ -1,3 +1,5 @@
+@import '~antd/dist/antd.dark.css';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +12,59 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.input.text:hover {
+  border-color: #159745;
+}
+
+.input.text:focus {
+  border-color: #159745;
+}
+
+.ant-input:hover {
+  border-color: #159745;
+}
+
+.ant-input:focus {
+  border-color: #159745;
+}
+
+.ant-input-search .ant-input:hover {
+  border-color: #159745;
+}
+
+.ant-input-search .ant-input:focus {
+  border-color: #159745;
+}
+
+.ant-btn-primary {
+  background: #1fdf64;
+  border: none;
+  font-weight: bold;
+  color: black;
+}
+
+.ant-btn-primary:hover {
+  background: #159745;
+  color: black;
+}
+
+.ant-btn-primary:focus {
+  background: #159745;
+  color: black;
+}
+
+.ant-btn {
+  font-weight: bold;
+}
+
+.ant-btn-default:hover {
+  border-color: #159745;
+  color: #159745;
+}
+
+.ant-btn-default:focus {
+  border-color: #159745;
+  color: #159745;
 }

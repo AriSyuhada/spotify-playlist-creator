@@ -1,6 +1,5 @@
 .Music {
-    border-radius: 20px;
-    background-color: #141414;
+    background-color: #1f1f1f;
     color: white;
     float: left;
     padding: 30px;
@@ -14,9 +13,11 @@
 }
 
 .music-info {
+    position: relative;
     flex-grow: 1;
     width: 50%;
     align-self: center;
+    margin-bottom: 37px;
 }
 
 .music-img img {
@@ -24,14 +25,26 @@
     border-radius: 50px;
 }
 
-.btn {
+.music-duration {
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+.button-wrapper {
     position: absolute;
     bottom: 25px;
-    left: 105px;
-    width: 150px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    justify-content: center;
+    /* width: 150px;
     height: 30px;
     border-radius: 10px;
-    border: none;
+    border: none; */
 }
 
 .title-wrapper {
@@ -83,7 +96,7 @@
     margin: 5px auto 0 auto;
 }
 
-.select {
+/* .select {
     color: white;
     text-transform: uppercase;
     font-weight: bold;
@@ -96,4 +109,4 @@
     font-weight: bold;
     background-color: white;
     border: solid 2px #16a349;
-}
+} */

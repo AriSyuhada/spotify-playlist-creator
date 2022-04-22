@@ -1,0 +1,51 @@
+/* body {
+    text-align: center;
+} */
+
+.top-wrapper {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.side-info {
+    position: relative;
+    margin: auto 4vw;
+    
+}
+
+.landing-title {
+    color: #1fdf64;
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.login-info {
+    margin-top: 50px;
+}
+
+.login {
+    position: absolute;
+    background-color: transparent;
+    background-color: #1fdf64;
+    color: black;
+    /* border: white solid 1px; */
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 1vh 2vw;
+    cursor: pointer;
+}
+
+.login:hover {
+    /* border: rgb(170, 170, 170) solid 1px;
+    color: rgb(170, 170, 170); */
+    padding: 1.2vh 2.2vw;
+}
+
+.side-image {
+    background-image: url(../Images/omid-armin-GIm5OV5rY0w-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

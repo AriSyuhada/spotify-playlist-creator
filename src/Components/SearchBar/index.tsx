@@ -31,7 +31,7 @@ function SearchBar() {
 		const keywords = searchKey;
 		const type = "track";
 		try {
-			const response = await fetch(`${url}?q=${keywords}&type=${type}&limit=12`, {
+			const response = await fetch(`${url}?q=${keywords}&type=${type}&limit=15`, {
 				headers: {
 					"Authorization" : "Bearer " + token
 				}

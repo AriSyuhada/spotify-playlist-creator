@@ -1,6 +1,132 @@
+.page-content {
+    margin-left: 56px;
+}
+
 .musics-wrapper {
     display: grid;
     align-items: center;
     grid-template-columns: repeat(3, 350px);
     grid-gap: 20px;
+    padding-bottom: 10vh;
+}
+
+.loading-container {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    height: 100vh;
+}
+
+.profile-wrapper {
+    margin-top: 3vh;
+    margin-bottom: 4vh;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-popover {
+    display: flex;
+    align-items: center;
+}
+
+.create-playlist-title {
+    color: #1fdf64;
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.create-playlist-sub-title {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5vh;
+}
+
+.ant-collapse-item {
+    position: relative;
+    display: flex;
+    background-color: #1f1f1f;
+}
+
+.ant-collapse-header {
+    position: relative;
+    height: 100vh;
+    width: 3vw;
+}
+
+.ant-collapse-header > div {
+    position: absolute;
+    right: 0.5vw;
+    top: 50vh;
+}
+
+.ant-collapse-content {
+    height: 100vh;
+    min-width: 24vw;
+}
+
+.collapse-menu {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+}
+
+.clear-button {
+    margin-top: 1vh;
+    margin-bottom: 3vh;
+}
+
+.selected-song-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin: 2vh auto;
+}
+
+.selected-song-info-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 15vw;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.selected-song-info-wrapper p {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.selected-song-info-wrapper p:not(:hover) {
+    text-overflow: ellipsis;
+}
+
+.selected-song-info-wrapper p:hover, .selected-song-info-wrapper p:focus {
+    display: inline-block;
+    animation-name: scroll-left;
+    animation-duration: 7s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+}
+
+@keyframes scroll-left {
+    0% {
+        overflow: visible;
+        right: 0px;
+        transform: translateX(0%);
+    }
+    90%,
+    100% {
+        overflow: visible;
+        right: 100%;
+        transform: translateX(-100%);
+    }
+}
+
+.ant-btn-icon-only:hover {
+    border-color: #800f19;
+    color: #800f19;
 }
