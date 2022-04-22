@@ -6,28 +6,28 @@ You can review this project from [Vercel app](gg-fe-project-arisyuhada.vercel.ap
 
 ## What are the features?
 
-Login to your account safely
+- Login to your account safely
 : Don't worry about being scammed by a phishing website. This site is safely accessible to you. You can keep your credentials in your pocket safely.
 
-Search your favorite tracks 
+- Search your favorite tracks 
 : This app can search every music for you from Spotify API directly. So, don't worry about your favorite music not being listed.
 
-Select some tracks to add to your new playlist
+- Select some tracks to add to your new playlist
 : You can select and deselect every music that you want. Trying to manage the order of your track? I'm working on it on the next update.
 
-Create a new playlist using all of the selected music
+- Create a new playlist using all of the selected music
 : Click on the "Create a Playlist" button at the center of the page, there'll be a pop-up showing you the form. Fill out the form using with playlist title and the description. Submit it and your playlist is created on your account.
 
-Keep a track of your selected music on your sidebar
+- Keep a track of your selected music on your sidebar
 : Take a look at the sidebar, and click on it. There are all of the tracks you selected before. You can remove it from there too if you want.
 
-Clear all the selected music
+- Clear all the selected music
 : Messed upon choosing your music? Worry not, there's a button on the sidebar that can help you clear all your selected music.
 
-Account profile information
+- Account profile information
 : Take a look at the top of the pages, you can click on your username, and there'll be some brief information about your account. There's a button to get you on your account on the Spotify website.
 
-Logout from your account
+- Logout from your account
 : Done using our app? You can log out from the profile information dropdown.
 
 ## Installation and How to Run it
