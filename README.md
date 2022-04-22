@@ -34,6 +34,8 @@ You can review this project from [Vercel app](gg-fe-project-arisyuhada.vercel.ap
 
 First thing first, you need to clone this project repository. But don't forget to install the Node.js environment from [this](https://nodejs.org/en/download/) site first.
 
+There's some configuration you need to make on `.eslintrc.json` file. Change the `linebreak-style` on the `error` config to the `windows` (If you edit the project on Windows) or `unix` (If on unix OS).
+
 ### `npx create-react-app .`
 
 After you clone this project on your local repository. Open your terminal, bash the project directory, and execute the above command.
