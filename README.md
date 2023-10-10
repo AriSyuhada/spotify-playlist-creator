@@ -2,7 +2,7 @@
 # Spotify Create Playlist App
 This project was created using React library, you can see their awesome bootstrap [here](https://github.com/facebook/create-react-app). Also, this project is styled using Ant Design Component UI framework, check out their website [here](https://ant.design/).
 
-You can review this project from [Vercel app](gg-fe-project-arisyuhada.vercel.app). The app doesn't authorize you? Contact [me](ari.syuhada.hadak@gmail.com) your Spotify account email, don't worry it's for whitelisting purposes, no scam for sure.
+You can review this project from [Vercel app](https://gg-fe-project-arisyuhada.vercel.app). The app doesn't authorize you? Contact [me](ari.syuhada.hadak@gmail.com) your Spotify account email, don't worry it's for whitelisting purposes, no scam for sure.
 
 ## What are the features?
 
